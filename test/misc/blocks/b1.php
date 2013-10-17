@@ -1,1 +1,1 @@
-<div>block 1</div>
+<div>block <?=$param?></div>

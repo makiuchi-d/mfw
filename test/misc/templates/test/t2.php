@@ -1,3 +1,4 @@
 <p>template 2</p>
-<?=block('b1')?>
+<?=$param?>
+<?=block('b1',array('param'=>'qq'))?>
 <?=block('b1')?>

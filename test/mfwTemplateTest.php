@@ -44,8 +44,8 @@ class mfwTemplateTest extends PHPUnit_Framework_TestCase
 	public function testBlock()
 	{
 		$t = new mfwTemplate('test/t2',self::BASEDIR);
-		$c = $t->build();
-		$exp = "<p>template 2</p>\n<div>block 1</div><div>block 1</div>";
+		$c = $t->build(array('param'=>'pp'));
+		$exp = "<p>template 2</p>\npp<div>block qq</div><div>block pp</div>";
 		$this->assertEquals($exp,$c);
 	}
 

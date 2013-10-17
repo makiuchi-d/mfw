@@ -47,20 +47,18 @@ class mfwTemplate
 	{
 		$template = file_get_contents($this->templatefile);
 
+		// blockからの呼び出し用に保存
 		self::$curobj = $this;
-
 		$this->params = $params;
-		extract($params);
 
-		ob_start();
-		eval('?>'.$template);
-		$contents = ob_get_clean();
+		$r = new mfwTemplateRenderer($template,$params);
+		$contents = $r->render();
 
 		if($this->layout && file_exists($this->layout)){
 			$layout = file_get_contents($this->layout);
-			ob_start();
-			eval('?>'.$layout);
-			$contents = ob_get_clean();
+			$this->params['contents'] = $contents;
+			$r = new mfwTemplateRenderer($layout,$this->params);
+			$contents = $r->render();
 		}
 
 		return $contents;
@@ -77,6 +75,32 @@ class mfwTemplate
 	}
 
 }
+
+/**
+ * レンダリングクラス.
+ * 変数を隔離するためこの中でextractする.
+ */
+class mfwTemplateRenderer
+{
+	protected $template;
+	protected $params;
+
+	public function __construct($template,$params)
+	{
+		$this->template = $template;
+		$this->params = $params;
+	}
+
+	public function render()
+	{
+		extract($this->params);
+		ob_start();
+		eval('?>'.$this->template);
+		return ob_get_clean();
+	}
+}
+
+
 
 /**
  * Template用関数: URL生成
@@ -99,10 +123,8 @@ function block($name,$additional_params=array())
 		return "block '{$name}' is not found.";
 	}
 
-	extract($t->getParams());
-	extract($additional_params);
-
-	ob_start();
-	include $file;
-	return ob_get_clean();
+	$r = new mfwTemplateRenderer(
+		file_get_contents($file),
+		$additional_params + $t->getParams());
+	return $r->render();
 }

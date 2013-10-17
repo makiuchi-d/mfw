@@ -20,7 +20,7 @@ class mfwTemplate
 
 		$file = "{$this->templatedir}/{$name}.php";
 		if(!file_exists($file)){
-			throw new Exception("template file is not exists: {$file}");
+			throw new InvalidArgumentException("template file is not exists: {$file}");
 		}
 		$this->templatefile = $file;
 
@@ -35,7 +35,7 @@ class mfwTemplate
 	{
 		$file = "{$this->templatedir}/{$layout}.php";
 		if(!file_exists($file)){
-			throw new Exception("layout file is not exists: {$file}");
+			throw new InvalidArgumentException("layout file is not exists: {$file}");
 		}
 		$this->layout = $file;
 	}

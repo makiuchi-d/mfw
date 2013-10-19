@@ -37,6 +37,7 @@ echo "<?php\n";
  */
 class <?=$class?> extends mfwObject {
 	const DB_CLASS = '<?=$class?>Db';
+	const SET_CLASS = '<?=$class?>Set';
 }
 
 /**

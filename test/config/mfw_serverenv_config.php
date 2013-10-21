@@ -1,6 +1,8 @@
 <?php
 
 $serverenv_config = array(
+	'application_identifier' => 'unittest-env',
+
 	'unittest' => array(
 		'http_proxy' => array(
 			'host' => '127.0.0.1',

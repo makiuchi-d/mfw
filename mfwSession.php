@@ -18,7 +18,7 @@ class mfwSession
 
 	protected function __construct()
 	{
-		$this->prefix = mfwApplication::cachePrefix();
+		$this->prefix = mfwServerEnv::cachePrefix();
 		session_name("{$this->prefix}seskey");
 		session_start();
 	}

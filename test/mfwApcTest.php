@@ -22,6 +22,7 @@ class mfwApcTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
+		mfwServerEnv::setEnv('unittest');
 	}
 
 	/**
@@ -37,7 +38,7 @@ class mfwApcTest extends PHPUnit_Framework_TestCase
 	public function testMakeKey()
 	{
 		$key = TestApc::makeKey('abcdefg');
-		$this->assertStringStartsWith(mfwApplication::cachePrefix(),$key);
+		$this->assertStringStartsWith(mfwServerEnv::cachePrefix(),$key);
 	}
 
 	/**

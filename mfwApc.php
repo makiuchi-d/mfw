@@ -9,7 +9,7 @@ class mfwApc {
 
 	protected static function makeKey($key)
 	{
-		return mfwApplication::cachePrefix().$key;
+		return mfwServerEnv::cachePrefix().$key;
 	}
 
 	public static function defaultExpire($expire=null)
@@ -40,7 +40,7 @@ class mfwApc {
 
 	public static function deletePrefixMatch($keyprefix)
 	{
-		$keyprefix = mfwApplication::cachePrefix().$keyprefix;
+		$keyprefix = mfwServerEnv::cachePrefix().$keyprefix;
 		$keyprefix = preg_quote($keyprefix,'/');
 
 		$it = new APCIterator('user',"/^{$keyprefix}/",APC_ITER_KEY);

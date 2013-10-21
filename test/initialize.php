@@ -3,7 +3,6 @@ define('APP_ROOT',__DIR__);
 
 require_once __DIR__.'/../mfwActions.php';
 require_once __DIR__.'/../mfwApc.php';
-require_once __DIR__.'/../mfwApplication.php';
 require_once __DIR__.'/../mfwDBConnection.php';
 require_once __DIR__.'/../mfwDBIBase.php';
 require_once __DIR__.'/../mfwHttp.php';

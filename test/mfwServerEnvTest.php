@@ -185,5 +185,26 @@ class mfwServerEnvTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('/usr/local/bin/swfmill',$swfmill);
 	}
 
+	/**
+	 * @dataProvider cachePrefixProvider
+	 */
+	public function testCachePrefix($env,$exp_prefix)
+	{
+		elb_start();
+		mfwServerEnv::setEnv($env);
+		elb_get_clean();
+
+		$prefix = mfwServerEnv::cachePrefix();
+		$this->assertEquals($exp_prefix,$prefix);
+	}
+	public function cachePrefixProvider()
+	{
+		return array(
+			array('','unittest-env__test_'),
+			array('unittest','unittest-env_unittest_test_'),
+			array('illegalenv','unittest-env_illegalenv_test_'),
+			);
+	}
+
 }
 ?>

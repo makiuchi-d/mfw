@@ -6,7 +6,7 @@
 /**
  * Memcache wrapper class.
  * アプリ固有のprefixをキーに透過的に付加する.
- * @see mfwApplication::cachePrefix()
+ * @see mfwServerEnv::cachePrefix()
  */
 class mfwMemcache {
 
@@ -53,7 +53,7 @@ class mfwMemcache {
 	 */
 	protected static function makeKey($key)
 	{
-		$prefix = mfwApplication::cachePrefix();
+		$prefix = mfwServerEnv::cachePrefix();
 		return "{$prefix}{$key}";
 	}
 

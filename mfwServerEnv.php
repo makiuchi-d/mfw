@@ -9,7 +9,7 @@ class mfwServerEnv
 
 	protected static $env = null;
 	protected static $config = null;
-
+	protected static $cache_prefix = '';
 	protected static $dbauth = array();
 
 	protected static function errorLog($message)
@@ -29,6 +29,13 @@ class mfwServerEnv
 		include APP_ROOT.self::CONFIG_FILE;
 
 		self::$env = $env;
+
+		$id = isset($serverenv_config['application_identifier'])?
+			$serverenv_config['application_identifier']: '';
+		$id = str_replace(' ','_',$id);
+		$branch = basename(APP_ROOT);
+		self::$cache_prefix = "{$id}_{$env}_{$branch}_";
+
 		if(isset($serverenv_config[$env])){
 			self::$config = $serverenv_config[$env];
 		}
@@ -126,6 +133,13 @@ class mfwServerEnv
 	public static function swfmill()
 	{
 		return static::loadConfig('swfmill');
+	}
+
+	/**
+	 */
+	public static function cachePrefix()
+	{
+		return static::$cache_prefix;
 	}
 
 }

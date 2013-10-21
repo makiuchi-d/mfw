@@ -29,7 +29,7 @@ class mfwSessionTest extends PHPUnit_Framework_TestCase
 	{
 		mfwSession::init();
 		$sesname = session_name();
-		$exp = mfwApplication::cachePrefix().'seskey';
+		$exp = mfwServerEnv::cachePrefix().'seskey';
 		$this->assertEquals($exp,$sesname);
 	}
 

@@ -107,7 +107,7 @@ class mfwTemplateRenderer
  */
 function url($query,$scheme=null)
 {
-	return mfwRequest::makeUrl($query,$scheme=null);
+	return mfwRequest::makeUrl($query,$scheme);
 }
 
 /**

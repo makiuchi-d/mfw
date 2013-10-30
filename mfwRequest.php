@@ -226,20 +226,20 @@ class mfwRequest {
 			if(preg_match('|^(.*)/[^/]+.php|',$_SERVER['SCRIPT_NAME'],$m)){
 				$path = $m[1];
 			}
-			if(!$scheme){
-				if(isset($_SERVER['HTTP_X_FORWARDED_PROTO'])){
-					$scheme = $_SERVER['HTTP_X_FORWARDED_PROTO'];
-				}
-				else{
-					$scheme = 'http';
-					if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'){
-						$scheme = 'https';
-					}
+			self::$url_base = "://{$_SERVER['HTTP_HOST']}{$path}";
+		}
+		if(!$scheme){
+			if(isset($_SERVER['HTTP_X_FORWARDED_PROTO'])){
+				$scheme = $_SERVER['HTTP_X_FORWARDED_PROTO'];
+			}
+			else{
+				$scheme = 'http';
+				if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'){
+					$scheme = 'https';
 				}
 			}
-			self::$url_base = "{$scheme}://{$_SERVER['HTTP_HOST']}{$path}";
 		}
-		return self::$url_base . $query;
+		return $scheme . self::$url_base . $query;
 	}
 
 	/**

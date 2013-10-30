@@ -105,9 +105,9 @@ class mfwTemplateRenderer
 /**
  * Template用関数: URL生成
  */
-function url($query)
+function url($query,$scheme=null)
 {
-	return mfwRequest::makeUrl($query);
+	return mfwRequest::makeUrl($query,$scheme=null);
 }
 
 /**

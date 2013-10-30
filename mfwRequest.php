@@ -199,9 +199,14 @@ class mfwRequest {
 	public static function url()
 	{
 		if(self::$url===null){
-			$scheme = 'http';
-			if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'){
-				$scheme = 'https';
+			if(isset($_SERVER['HTTP_X_FORWARDED_PROTO'])){
+				$scheme = $_SERVER['HTTP_X_FORWARDED_PROTO'];
+			}
+			else{
+				$scheme = 'http';
+				if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'){
+					$scheme = 'https';
+				}
 			}
 			self::$url = "{$scheme}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 		}
@@ -222,9 +227,14 @@ class mfwRequest {
 				$path = $m[1];
 			}
 			if(!$scheme){
-				$scheme = 'http';
-				if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'){
-					$scheme = 'https';
+				if(isset($_SERVER['HTTP_X_FORWARDED_PROTO'])){
+					$scheme = $_SERVER['HTTP_X_FORWARDED_PROTO'];
+				}
+				else{
+					$scheme = 'http';
+					if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'){
+						$scheme = 'https';
+					}
 				}
 			}
 			self::$url_base = "{$scheme}://{$_SERVER['HTTP_HOST']}{$path}";

@@ -248,6 +248,20 @@ abstract class mfwObjectSet implements ArrayAccess,Iterator {
 	}
 
 	/**
+	 * シャッフル (副作用).
+	 */
+	public function shuffle()
+	{
+		$keys = array_keys($this->rows);
+		shuffle($keys);
+		$rows = array();
+		foreach($keys as $k){
+			$rows[$k] = $this->rows[$k];
+		}
+		$this->rows = $rows;
+	}
+
+	/**
 	 * 抽出. (array_filter)
 	 * @param callback $func フィルタ関数. 引数は$rowsの要素.
 	 * return ObjectSet (新たに作られる).

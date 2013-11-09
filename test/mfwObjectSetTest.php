@@ -453,5 +453,26 @@ class mfwObjectSetTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($exp,$keys);
 	}
 
+	/**
+	 */
+	public function testShuffle()
+	{
+		$testarr = array(
+			array('key'=>1,'value'=>2),
+			array('key'=>2,'value'=>4),
+			array('key'=>3,'value'=>1),
+			array('key'=>4,'value'=>3),
+			array('key'=>5,'value'=>2),
+			array('key'=>6,'value'=>4),
+			array('key'=>7,'value'=>1),
+			array('key'=>8,'value'=>3),
+			);
+		$set = new TestObjectSet($testarr);
+
+		$set->shuffle();
+		$keys = array_keys($set->getRows());
+		$this->assertNotEquals(array(1,2,3,4,5,6,7,),$keys);
+	}
+
 }
 

@@ -34,7 +34,7 @@ class TestObjectDb extends mfwObjectDb {
 
 	public static function makeInPlaceholder(Array $list,Array &$bind,$prefix='')
 	{
-		return parent::makeInPlaceholder($list,&$bind,$prefix);
+		return parent::makeInPlaceholder($list,$bind,$prefix);
 	}
 }
 

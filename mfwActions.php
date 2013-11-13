@@ -73,7 +73,7 @@ class mfwActions {
 	{
 		$query = mfwHttp::composeUrl($query,$params);
 
-		if(strpos($query,'http')!==0){
+		if(strpos($query,'://')===false){
 			$query = mfwRequest::makeUrl($query);
 		}
 

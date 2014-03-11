@@ -23,7 +23,7 @@ class mfwUserAgent
 			$this->type = 'iPhone';
 			$this->setIOSSubtypes($ua);
 		}
-		elseif(strpos($ua,'(iPod;')!==false){
+		elseif(strpos($ua,'(iPod;')!==false || strpos($ua,'(iPod touch;')!==false){
 			$this->type = 'iPod';
 			$this->setIOSSubtypes($ua);
 		}

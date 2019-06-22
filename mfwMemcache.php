@@ -1,6 +1,6 @@
 <?php
 /*!@file
- * Memcache wrapper.
+ * Memcached wrapper.
  */
 
 /**
@@ -26,8 +26,8 @@ class mfwMemcache {
 				throw new Exception('memcache server undefined');
 			}
 
-			$mc = new Memcache();
-			if($mc->connect($conf['host'],$conf['port'])){
+			$mc = new Memcached();
+			if($mc->addServer($conf['host'],$conf['port'])){
 				self::$mc = $mc;
 			}
 			else{
@@ -67,7 +67,7 @@ class mfwMemcache {
 	public static function set($key, $value, $expire=600)
 	{
 		$mc = static::connect();
-		return $mc->set(static::makeKey($key),$value,0,$expire);
+		return $mc->set(static::makeKey($key),$value,$expire);
 	}
 
 	/**

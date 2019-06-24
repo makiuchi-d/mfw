@@ -208,7 +208,11 @@ class mfwRequest {
 					$scheme = 'https';
 				}
 			}
-			self::$url = "{$scheme}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+			$host = $_SERVER['HTTP_HOST'];
+			if(isset($_SERVER['HTTP_X_FORWARDED_HOST'])){
+				$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+			}
+			self::$url = "{$scheme}://{$host}{$_SERVER['REQUEST_URI']}";
 		}
 		return self::$url;
 	}
@@ -226,7 +230,11 @@ class mfwRequest {
 			if(preg_match('|^(.*)/[^/]+.php|',$_SERVER['SCRIPT_NAME'],$m)){
 				$path = $m[1];
 			}
-			self::$url_base = "://{$_SERVER['HTTP_HOST']}{$path}";
+			$host = $_SERVER['HTTP_HOST'];
+			if(isset($_SERVER['HTTP_X_FORWARDED_HOST'])){
+				$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+			}
+			self::$url_base = "://{$host}{$path}";
 		}
 		if(!$scheme){
 			if(isset($_SERVER['HTTP_X_FORWARDED_PROTO'])){

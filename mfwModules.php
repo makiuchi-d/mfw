@@ -53,7 +53,6 @@ abstract class mfwModules {
 		}
 
 		if(($err=$class->initialize())){
-			error_log("initializing action failed: {$module}/{$action}");
 			return $err;
 		}
 

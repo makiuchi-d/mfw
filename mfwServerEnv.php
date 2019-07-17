@@ -78,7 +78,6 @@ class mfwServerEnv
 			return null;
 		}
 		if(!isset($proxy['host']) || !isset($proxy['port'])){
-			static::errorLog("http_proxy: host/port is not defined");
 			return null;
 		}
 		return $proxy;

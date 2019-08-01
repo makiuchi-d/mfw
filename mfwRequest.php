@@ -181,6 +181,15 @@ class mfwRequest {
 	}
 
 	/**
+	 * リモートホストのIPアドレス
+	 */
+	public static function remoteHost()
+	{
+		return isset($_SERVER['HTTP_X_FORWARDED_FOR'])?
+			$_SERVER['HTTP_X_FORWARDED_FOR']: $_SERVER['REMOTE_ADDR'];
+	}
+
+	/**
 	 * UserAgentオブジェクト取得
 	 * @return mfwUserAgentオブジェクト.
 	 * @sa class mfwUserAgent.

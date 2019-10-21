@@ -20,7 +20,6 @@ class mfwDBConnection {
 				$conf['dsn'],$conf['user'],$conf['pass'],
 				array(
 					PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-					PDO::MYSQL_ATTR_INIT_COMMAND=>'SET NAMES UTF8'
 					)
 				);
 			self::$con_pool[$env][$name] = $pdo;
